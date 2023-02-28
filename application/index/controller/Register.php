@@ -6,6 +6,7 @@ use app\common\model\User;
 use think\Controller;
 use think\Request;
 use app\common\exception\ValidateException;
+use think\facade\Session;
 
 class Register extends Base
 {
@@ -25,7 +26,9 @@ class Register extends Base
     public function save(Request $request)
     {
         if (!$request->isPost() || !$request->isAjax()) {
-            return $this->error('对不起，你访问页面不存在。');
+            $message = "对不起，你访问页面不存在。";
+            Session::flash('danger', $message);
+            return $this->error($message);
         }
 
         try {
@@ -39,7 +42,9 @@ class Register extends Base
         }
 
         // 注册成功后跳转到首页
-        return $this->success('恭喜你注册成功。', '[page.root]');
+        $message = "恭喜你注册成功。";
+        Session::flash('success', $message);
+        return $this->success($message, '[page.root]');
     }
 
     public function check_unique(Request $request)
