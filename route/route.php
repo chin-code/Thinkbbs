@@ -17,6 +17,11 @@ Route::post('signup/check_unique', 'register/check_unique')->name('signup.check_
 Route::get('signup', 'register/create')->name('page.signup');
 Route::post('signup', 'register/save')->name('page.signup.save');
 
+//用户登录与退出
+Route::get('login', 'login/create')->name('page.login');
+Route::post('login', 'login/save')->name('page.login.save');
+Route::post('logout', 'login/delete')->name('page.logout');
+
 return [
 
 ];
